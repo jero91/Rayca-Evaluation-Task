@@ -1,0 +1,28 @@
+localcores = 8
+localmem = 8
+
+process cellranger {
+
+    """
+	cellranger count --id=samplePrueb \
+                   --transcriptome=/mnt/beegfs/jparra/EPOSE_02/refdata-gex-GRCh38-2020-A \
+                   --fastqs=/mnt/beegfs/jparra/EPOSE_02/X204SC22050892-Z01-F002/raw_data/A0083 \
+                   --localcores=${localcores} \
+                   --localmem=${localmem}
+
+    """
+}
+
+process rmarkdown {
+    """
+   Rscript -e "rmarkdown::render('MouseSCMerge.Rmd')"
+
+    """
+}
+
+workflow {
+    rmarkdown()
+}
+
+
+
